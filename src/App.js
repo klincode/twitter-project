@@ -6,19 +6,21 @@ import {
 import { Navigation } from './components/Navigation'
 import { Footer } from './components/Footer'
 import { LoginPopup } from './components/LoginPopup'
-import { HomePage, LoginPage, SignupPage } from './pages'
+import { HomePage, LoginPage, SignupPage, MainPage } from './pages'
 import GlobalStyle from './styles/global'
 
 function App() {
   return (
     <div className="App">
       <Router>
+
         {/* <LoginPopup /> */}
         <Navigation top />
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/login' component={LoginPage} />
           <Route path='/signup' component={SignupPage} />
+          <Route path='/main' component={MainPage} />
         </Switch>
         {/* <Footer /> */}
       </Router>

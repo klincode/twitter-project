@@ -1,5 +1,5 @@
 import React from 'react';
-import { H2 } from '../Shared'
+import { H2, H3 } from '../Shared'
 import { S } from './styled'
 
 const GuestsPosts = () => {

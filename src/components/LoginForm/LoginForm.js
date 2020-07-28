@@ -7,7 +7,6 @@ const LoginForm = () => {
       <FormLabel>Nazwa Użytkownika<Input type="text" /></FormLabel>
       <FormLabel>Hasło<Input type="password" /></FormLabel>
       <Button full type="submit">Zaloguj się</Button>
-
     </Form>
 
   );

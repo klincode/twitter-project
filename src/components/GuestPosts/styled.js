@@ -1,9 +1,7 @@
 import styled from 'styled-components'
-import { Postgresql } from 'styled-icons/simple-icons'
 
 export const S = {
   Container: styled.div`
-
   background-color:#f4f8fb;
   border-radius:10px;
   margin:50px 20px;

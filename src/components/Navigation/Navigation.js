@@ -10,6 +10,7 @@ const Navigation = ({ top }) => {
         <S.Link to="/">Home</S.Link>
         <S.Link to="/login">Login</S.Link>
         <S.Link to="/signup">Sign Up</S.Link>
+        <S.Link to="/main">Main</S.Link>
       </ul>
     </S.Nav>);
 }

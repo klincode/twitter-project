@@ -11,6 +11,7 @@ body {
   font-family:'Roboto';
   font-size:15px;
   /* background-image: */
+ 
 }
 `
 export default GlobalStyle

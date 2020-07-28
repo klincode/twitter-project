@@ -6,5 +6,4 @@ export const Wrapper = styled.div`
   transform:translate(-50%,-50%);
   margin:0 auto;
   width:${props => props.w50 ? '50%' : '70%'};
-  
 `

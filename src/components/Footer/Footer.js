@@ -1,9 +1,12 @@
 import React from 'react';
 import { Navigation } from '../Navigation'
+import { S } from './styled'
 const Footer = () => {
   return (
     <>
-      <Navigation />
+      <S.Footer>
+        <Navigation />
+      </S.Footer>
     </>
   );
 }
