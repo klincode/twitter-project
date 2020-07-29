@@ -1,5 +1,5 @@
 import React from 'react';
-import { H2, H3, Button } from '../Shared'
+import { H3, Button } from '../Shared'
 import { S } from './styled'
 import user from '../../img/user.jpg'
 const UsersList = () => {

@@ -9,3 +9,4 @@ export * from './Link';
 export * from './Wrapper';
 export * from './Logo';
 export * from './Container';
+export * from './Alert';
