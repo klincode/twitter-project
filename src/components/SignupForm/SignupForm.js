@@ -18,13 +18,18 @@ const SignupForm = () => {
       API.config.headers
     )
       .then((res) => {
-        setMessage([...messages, { "server": `Użytkownik ${res.data.user.username} : ${res.data.user.email} został zarejestrowany w systemie`, "type": "info" }])
+        if (!res.data.signedup) {
+          setError([...errors, { "server": `Błąd serwera : ${res.status} ${res.data.message.username[0]}`, "type": "error" }]);
 
+        } else {
+          setMessage([...messages, { "server": `Użytkownik ${res.data.user.username} : ${res.data.user.email} został zarejestrowany w systemie`, "type": "info" }])
+
+        }
       })
       .catch((err) => {
         setError([...errors, { "server": `Błąd serwera : ${err.response.status} ${err.response.statusText}`, "type": "error" }])
-        console.log(err.response.statusText);
       })
+
   }
 
   const clearForm = () => {
@@ -36,13 +41,13 @@ const SignupForm = () => {
   }
 
   const handleSubmit = (e) => {
-    clearForm();
+
     e.preventDefault();
     if (validateForm()) {
       createUser({
-        "username": "adam66ff6",
-        "email": "adamklin86k@gmail.com",
-        "password": "1234"
+        "username": userName,
+        "email": userEmail,
+        "password": userPass
       })
 
     }

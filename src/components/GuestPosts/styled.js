@@ -32,6 +32,7 @@ export const S = {
   padding-left:15px;
   `,
   Date: styled.div`
+  padding-top:10px;
     font-size:0.7rem;
     color:#767676;
       padding-left:15px;

@@ -9,25 +9,34 @@ export const S = {
   flex-grow:1;
   `,
   LeftSide: styled.div`
-  flex-basis: 50%;
+  position:fixed;
+  top:0;
+  bottom:0;
+  width: 50%;
   display:flex;
   justify-content:center;
-  align-items:center;
+  /* align-items:flex-start; */
   background-image:url("${tweeterLogo}");
   background-color:#71c9f7;
   background-repeat:no-repeat;
   background-size:1000px;
-  background-position:40% 40%;
+  background-position:40% 5%;
   
   `,
   RightSide: styled.div`
     flex-basis: 50%;
+    margin-left:50%;
     background-color:#fff;
   `,
   Content: styled.ul`
-  list-style:none;
-    margin:0;
+    list-style:none;
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
     padding:0;
+    min-width:450px;
+    width:80%;
+    padding:10px;
 
     li {
       color:#fff;
@@ -39,7 +48,7 @@ export const S = {
     }
     span {
       margin-left:20px;      
-      /* background-color:red; */
+
     }
 
 .icon {
