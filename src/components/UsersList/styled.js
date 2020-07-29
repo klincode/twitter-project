@@ -1,9 +1,11 @@
 import styled from 'styled-components'
-
+import { H2 } from '../Shared'
 export const S = {
   Container: styled.div`
   background-color:#f4f8fb;
-  border-radius:10px
+  border-radius:10px;
+  border-top-left-radius:0;
+  border-bottom-left-radius:0;
   `,
   Users: styled.div`
   display:flex;
@@ -44,5 +46,9 @@ export const S = {
   UserLogin: styled.div`
   padding:0 10px;
   `,
-
+  H2: styled(H2)`
+  border-left:0;
+  border-right:0;
+  
+  `
 }

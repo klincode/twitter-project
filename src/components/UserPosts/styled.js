@@ -12,8 +12,12 @@ export const S = {
   Post: styled.section`
   padding:10px;
   border:1px solid #e7ecf0;
+  border-bottom:0px solid #e7ecf0;
   display:flex;
   flex-wrap:wrap;
+  &:last-child{
+    border-bottom:1px solid #e7ecf0;
+  }
   `,
   UserImg: styled.div`
   padding:10px;
@@ -55,11 +59,12 @@ export const S = {
   }
   `,
   H2: styled(H2)`
-  border:1px solid #e7ecf0;
+
   background-color:#fff;
   position:sticky;
   top: 0;
   /* padding:0; */
-  margin:18px 0 0;
+  /* margin:18px 0 0; */
+  margin-bottom:0;
   `
 }

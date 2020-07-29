@@ -5,6 +5,7 @@ import { S } from './styled'
 
 const Navigation = ({ top }) => {
   return (
+
     <S.Nav top={top}>
       <ul>
         <S.Link to="/">Home</S.Link>

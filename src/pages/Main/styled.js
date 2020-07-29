@@ -4,9 +4,8 @@ import styled from 'styled-components'
 export const S = {
   Container: styled.main`
   margin:0 auto;
-  padding-top:50px;
-  max-width:1040px;
-  height:100vh;
+  padding:50px 0;
+  max-width:1400px;
   width:100%;
   display:flex;
   `,

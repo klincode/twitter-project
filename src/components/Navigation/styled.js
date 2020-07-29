@@ -4,6 +4,7 @@ export const S = {
   Nav: styled.nav`
   position:${props => props.top ? 'absolute' : 'static'};
   top:0;
+  right:0;
   display:flex;
   background:transparent;
   justify-content:${props => props.top ? 'flex-end' : 'center'};

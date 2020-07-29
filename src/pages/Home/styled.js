@@ -4,7 +4,8 @@ export const S = {
   Container: styled.div`
   margin:0;
   display:flex;
-  min-height:95vh;
+  /* min-height:95vh; */
+  height:100vh;
   width:100%;
   flex-grow:1;
   `,

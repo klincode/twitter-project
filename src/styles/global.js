@@ -13,5 +13,6 @@ body {
   /* background-image: */
  
 }
+
 `
 export default GlobalStyle

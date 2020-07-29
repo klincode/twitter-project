@@ -7,22 +7,24 @@ import { Navigation } from './components/Navigation'
 import { Footer } from './components/Footer'
 import { LoginPopup } from './components/LoginPopup'
 import { HomePage, LoginPage, SignupPage, MainPage } from './pages'
+import { Container } from './components/Shared'
 import GlobalStyle from './styles/global'
 
 function App() {
   return (
     <div className="App">
       <Router>
-
         {/* <LoginPopup /> */}
-        <Navigation top />
         <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route path='/login' component={LoginPage} />
-          <Route path='/signup' component={SignupPage} />
-          <Route path='/main' component={MainPage} />
+          <Container>
+            <Navigation top />
+            <Route exact path='/' component={HomePage} />
+            <Route path='/login' component={LoginPage} />
+            <Route path='/signup' component={SignupPage} />
+            <Route path='/main' component={MainPage} />
+            <Footer />
+          </Container>
         </Switch>
-        {/* <Footer /> */}
       </Router>
       <GlobalStyle />
 

@@ -5,7 +5,7 @@ import user from '../../img/user.jpg'
 const UsersList = () => {
   return (
     <S.Container>
-      <H2>Warci obserwowania</H2>
+      <S.H2>Warci obserwowania</S.H2>
       <S.Users>
         <S.User>
           <S.UserInfo>
