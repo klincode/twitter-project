@@ -1,15 +1,42 @@
 import React, { useState } from 'react';
-import { Form, Input, FormLabel, Button, Alert } from '../Shared'
+import { Form, Input, FormLabel, Button, Alert } from '../Shared';
+import { API } from '../../API';
+import axios from 'axios'
+
 const SignupForm = () => {
-  const [userName, setUserName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
-  const [userPass, setUserPass] = useState('');
-  const [userConfirmPass, setUserConfirmPass] = useState('');
-  const [errors, setError] = useState([]);
+  const [userName, setUserName] = useState('homer666');
+  const [userEmail, setUserEmail] = useState('adam@em.pl');
+  const [userPass, setUserPass] = useState('adam!@#1');
+  const [userConfirmPass, setUserConfirmPass] = useState('adam!@#1');
+  const [messages, setMessage] = useState([]);
+
+  const createUser = (payload) => {
+    axios.post(
+      API.endPoints.signup,
+      payload,
+      API.config.headers
+    )
+      .then((res) => {
+        console.log("response", res);
+        setMessage([...messages, { "server": `Użytkownik ${res.data.user.username} : ${res.data.user.email} został zarejestrowany w systemie`, "type": "info" }])
+      })
+      .catch((err) => {
+        setMessage([...messages, { "server": `Błąd serwera : ${err.response.status} ${err.response.statusText}`, "type": "error" }])
+        console.log(err.response.statusText);
+      })
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    validateForm();
+    if (validateForm()) {
+      console.log('wysłane');
+      createUser({
+        "username": "adam66ff6",
+        "email": "adamklin86k@gmail.com",
+        "password": "1234"
+      })
+
+    }
 
   }
 
@@ -24,63 +51,75 @@ const SignupForm = () => {
   }
 
   const validateForm = () => {
-    let errors = [];
+    let messages = [];
     if (userName.length < 4 || userName === '' || (/\s/.test(userName))) {
-      errors.push({ 'userName': 'Wymagane min. 4 znaki \\ nie może zawierać spacji' });
+      messages.push({ 'userName': 'Wymagane min. 4 znaki \\ nie może zawierać spacji', 'type': 'error' });
     }
     if (!userEmail.includes('@') || userEmail === '' || (/\s/.test(userEmail))) {
-      errors.push({ 'userEmail': 'Niprawidłowy adres E-mail' });
+      messages.push({ 'userEmail': 'Niprawidłowy adres E-mail' });
     }
     if (userPass === '' || (/\s/.test(userPass)) || userPass.length < 6) {
-      errors.push({ 'userPass': 'Wymagane min. 6 znaki \\ nie może zawierać spacji' });
+      messages.push({ 'userPass': 'Wymagane min. 6 znaki \\ nie może zawierać spacji', 'type': 'error' });
     }
     if (!(/[!#@$%]/i.test(userPass)) || !(/[0-9]{1,}/i.test(userPass))) {
-      errors.push({ 'userPass': 'Hasło musi zawierać znaki specjalne i jedną cyfrę' });
+      messages.push({ 'userPass': 'Hasło musi zawierać znaki specjalne i jedną cyfrę', 'type': 'error' });
     }
     if (userConfirmPass !== userPass) {
-      errors.push({ 'userConfirmPass': 'Wprowadzone hasła są różne' });
+      messages.push({ 'userConfirmPass': 'Wprowadzone hasła są różne', 'type': 'error' });
     }
+    setMessage(messages);
+    let validationResult = messages.length === 0 ? true : false;
+    return validationResult
 
-    setError(errors);
-    console.log(errors);
   }
 
-  const showError = (inputName) => {
-    let error = '';
-    errors.filter(item => {
-      if (Object.keys(item).join() === inputName) {
-        error = item[inputName];
+  const showMessageAlert = (inputName) => {
+    // [0] - nazwa pola
+    // [1] - typ komunikatu [error,info]
+    let message = [];
+    messages.filter(item => {
+      // console.log(Object.keys(item)[1]);
+      console.log(item['type']);
+      if (Object.keys(item)[0] === inputName) {
+        message[0] = item[inputName];
+        message[1] = item['type'];
       }
     })
-    console.log(error);
-    return error;
+
+    if (message[1] === 'error') return <Alert error center>{message[0]}</Alert>
+    if (message[1] === 'info') return <Alert info center>{message[0]}</Alert>
+
   }
+
 
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <FormLabel>
-        Nazwa Użytkownika
+    <>
+      <Form onSubmit={handleSubmit}>
+        <FormLabel>
+          Nazwa Użytkownika
         <Input onChange={handleChange} type="text" value={userName} name="userName" />
-        <Alert error>{showError('userName')}</Alert>
-      </FormLabel>
-      <FormLabel>
-        Adres e-mail
+          <Alert error>{showMessageAlert('userName')}</Alert>
+        </FormLabel>
+        <FormLabel>
+          Adres e-mail
         <Input onChange={handleChange} type="text" value={userEmail} name="userEmail" />
-        <Alert error>{showError('userEmail')}</Alert>
-      </FormLabel>
-      <FormLabel>
-        Hasło
+          <Alert error>{showMessageAlert('userEmail')}</Alert>
+        </FormLabel>
+        <FormLabel>
+          Hasło
         <Input onChange={handleChange} type="password" value={userPass} name="userPass" />
-        <Alert error>{showError('userPass')}</Alert>
-      </FormLabel>
-      <FormLabel>
-        Powtórz hasło
+          <Alert error>{showMessageAlert('userPass')}</Alert>
+        </FormLabel>
+        <FormLabel>
+          Powtórz hasło
         <Input onChange={handleChange} type="password" value={userConfirmPass} name="userConfirmPass" />
-        <Alert error>{showError('userConfirmPass')}</Alert>
-      </FormLabel>
-      <Button type="submit">Zarejestruj się</Button>
-    </Form>
+          <Alert error>{showMessageAlert('userConfirmPass')}</Alert>
+        </FormLabel>
+        <Button type="submit">Zarejestruj się</Button>
+      </Form>
+      {showMessageAlert('server')}
+    </>
   );
 }
 
