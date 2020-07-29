@@ -8,6 +8,7 @@ const SignupForm = () => {
   const [userEmail, setUserEmail] = useState('adam@em.pl');
   const [userPass, setUserPass] = useState('adam!@#1');
   const [userConfirmPass, setUserConfirmPass] = useState('adam!@#1');
+  const [errors, setError] = useState([]);
   const [messages, setMessage] = useState([]);
 
   const createUser = (payload) => {
@@ -17,19 +18,27 @@ const SignupForm = () => {
       API.config.headers
     )
       .then((res) => {
-        console.log("response", res);
         setMessage([...messages, { "server": `Użytkownik ${res.data.user.username} : ${res.data.user.email} został zarejestrowany w systemie`, "type": "info" }])
+
       })
       .catch((err) => {
-        setMessage([...messages, { "server": `Błąd serwera : ${err.response.status} ${err.response.statusText}`, "type": "error" }])
+        setError([...errors, { "server": `Błąd serwera : ${err.response.status} ${err.response.statusText}`, "type": "error" }])
         console.log(err.response.statusText);
       })
   }
 
+  const clearForm = () => {
+    setUserName('');
+    setUserEmail('');
+    setUserPass('');
+    setUserConfirmPass('');
+    setMessage(['']);
+  }
+
   const handleSubmit = (e) => {
+    clearForm();
     e.preventDefault();
     if (validateForm()) {
-      console.log('wysłane');
       createUser({
         "username": "adam66ff6",
         "email": "adamklin86k@gmail.com",
@@ -37,7 +46,6 @@ const SignupForm = () => {
       })
 
     }
-
   }
 
   const handleChange = (e) => {
@@ -51,43 +59,47 @@ const SignupForm = () => {
   }
 
   const validateForm = () => {
-    let messages = [];
+    let errorMessages = [];
     if (userName.length < 4 || userName === '' || (/\s/.test(userName))) {
-      messages.push({ 'userName': 'Wymagane min. 4 znaki \\ nie może zawierać spacji', 'type': 'error' });
+      errorMessages.push({ 'userName': 'Wymagane min. 4 znaki \\ nie może zawierać spacji', 'type': 'error' });
     }
     if (!userEmail.includes('@') || userEmail === '' || (/\s/.test(userEmail))) {
-      messages.push({ 'userEmail': 'Niprawidłowy adres E-mail' });
+      errorMessages.push({ 'userEmail': 'Niprawidłowy adres E-mail', 'type': 'error' });
     }
     if (userPass === '' || (/\s/.test(userPass)) || userPass.length < 6) {
-      messages.push({ 'userPass': 'Wymagane min. 6 znaki \\ nie może zawierać spacji', 'type': 'error' });
+      errorMessages.push({ 'userPass': 'Wymagane min. 6 znaki \\ nie może zawierać spacji', 'type': 'error' });
     }
     if (!(/[!#@$%]/i.test(userPass)) || !(/[0-9]{1,}/i.test(userPass))) {
-      messages.push({ 'userPass': 'Hasło musi zawierać znaki specjalne i jedną cyfrę', 'type': 'error' });
+      errorMessages.push({ 'userPass': 'Hasło musi zawierać znaki specjalne i jedną cyfrę', 'type': 'error' });
     }
     if (userConfirmPass !== userPass) {
-      messages.push({ 'userConfirmPass': 'Wprowadzone hasła są różne', 'type': 'error' });
+      errorMessages.push({ 'userConfirmPass': 'Wprowadzone hasła są różne', 'type': 'error' });
     }
-    setMessage(messages);
-    let validationResult = messages.length === 0 ? true : false;
-    return validationResult
+
+    if (errorMessages.length > 0) { setError(errorMessages); return false } else { setError([]); return true }
 
   }
 
   const showMessageAlert = (inputName) => {
-    // [0] - nazwa pola
-    // [1] - typ komunikatu [error,info]
-    let message = [];
-    messages.filter(item => {
-      // console.log(Object.keys(item)[1]);
-      console.log(item['type']);
+    let message = {
+      text: '',
+      type: ''
+    };
+    errors.filter(item => {
       if (Object.keys(item)[0] === inputName) {
-        message[0] = item[inputName];
-        message[1] = item['type'];
+        message.text = item[inputName];
+        message.type = item['type'];
       }
     })
 
-    if (message[1] === 'error') return <Alert error center>{message[0]}</Alert>
-    if (message[1] === 'info') return <Alert info center>{message[0]}</Alert>
+    messages.filter(item => {
+      if (Object.keys(item)[0] === inputName) {
+        message.text = item[inputName];
+        message.type = item['type'];
+      }
+    })
+    if (message.type === 'error') return <Alert error >{message.text}</Alert>
+    if (message.type === 'info') return <Alert info center>{message.text}</Alert>
 
   }
 
@@ -99,22 +111,22 @@ const SignupForm = () => {
         <FormLabel>
           Nazwa Użytkownika
         <Input onChange={handleChange} type="text" value={userName} name="userName" />
-          <Alert error>{showMessageAlert('userName')}</Alert>
+          {showMessageAlert('userName')}
         </FormLabel>
         <FormLabel>
           Adres e-mail
         <Input onChange={handleChange} type="text" value={userEmail} name="userEmail" />
-          <Alert error>{showMessageAlert('userEmail')}</Alert>
+          {showMessageAlert('userEmail')}
         </FormLabel>
         <FormLabel>
           Hasło
         <Input onChange={handleChange} type="password" value={userPass} name="userPass" />
-          <Alert error>{showMessageAlert('userPass')}</Alert>
+          {showMessageAlert('userPass')}
         </FormLabel>
         <FormLabel>
           Powtórz hasło
         <Input onChange={handleChange} type="password" value={userConfirmPass} name="userConfirmPass" />
-          <Alert error>{showMessageAlert('userConfirmPass')}</Alert>
+          {showMessageAlert('userConfirmPass')}
         </FormLabel>
         <Button type="submit">Zarejestruj się</Button>
       </Form>

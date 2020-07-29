@@ -12,4 +12,11 @@ export const Alert = styled.div`
        color:#d40000;
       `
   }
+
+  ${props => props.info &&
+    css`
+      font-size:0.9rem;
+       color:#1da1f3;
+      `
+  }
   `
