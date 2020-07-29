@@ -15,10 +15,10 @@ function App() {
     <div className="App">
       <Router>
         {/* <LoginPopup /> */}
+        <Navigation top />
         <Switch>
+          <Route exact path='/' component={HomePage} />
           <Container>
-            <Navigation top />
-            <Route exact path='/' component={HomePage} />
             <Route path='/login' component={LoginPage} />
             <Route path='/signup' component={SignupPage} />
             <Route path='/main' component={MainPage} />

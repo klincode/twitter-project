@@ -8,6 +8,7 @@ import { GuestsPosts } from '../../components/GuestPosts'
 const HomePage = () => {
   return (
     <S.Container>
+
       <S.LeftSide>
         <S.Content>
           <li><Search size="35" /><span> Obserwuj to, co Cię interesuje.</span></li>
