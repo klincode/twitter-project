@@ -26,19 +26,19 @@ export const S = {
   UserInfo: styled.div`
   padding: 0 10px;
   flex-basis:100%;
+  flex-grow:1;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  div {
-    flex-basis:30%;
-  }
   `,
   UserImg: styled.div`
+  width:50px;
+
   img {
     min-width:50px;
     width:50px;
     border-radius:50%;
-    max-width:100%;
+    max-width:80%;
     max-height:100%;
     object-fit:cover;
   }

@@ -7,9 +7,6 @@ import axios from 'axios';
 const UsersList = () => {
   const [users, setUsersList] = useState([]);
   const [load, setLoad] = useState(true);
-  // console.log('=======================1=============');
-  // console.log(localStorage.getItem('jwt_token'));
-  // // console.log('====================================');
 
   useEffect(() => {
     axios({
@@ -18,13 +15,11 @@ const UsersList = () => {
       headers: API.config.headers,
     })
       .then((res) => {
-        console.log(res);
         setUsersList(res.data);
         setLoad(false)
       })
       //todo: dodać wyświetlanie błędów
-      .then((err) => console.log('blad:' + err))
-    // setTimeout(() => setLoginPopupVisible(true), 1000)
+      .catch((err) => console.log('blad:' + err))
   }, [])
 
 
