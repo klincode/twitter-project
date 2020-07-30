@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Loader from 'react-loader-spinner'
-// import { API } from '../../API'
 import { API } from '../../API'
-import { H2, H3 } from '../Shared'
+import { H2, H3, Spinner } from '../Shared'
 import { S } from './styled'
 
 const GuestsPosts = () => {
@@ -46,14 +44,7 @@ const GuestsPosts = () => {
           })
         }
       </S.Posts>
-      <Loader
-        type="Rings"
-        color="#00BFFF"
-        height={100}
-        width={100}
-        timeout={3000} //3 secs
-
-      />
+      <Spinner />
     </S.Container >
   );
 }
