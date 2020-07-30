@@ -16,6 +16,8 @@ function App() {
   const [guestsPosts, setGuestsPosts] = useState([]);
   const [load, setLoad] = useState(true);
   const [isLoginPopupVisible, setLoginPopupVisible] = useState(false);
+  // const [isUserLoggedIn, setUserLogIn] = useState(true);
+  const [toke, setToken] = useState();
 
   useEffect(() => {
     axios.post(
@@ -31,6 +33,9 @@ function App() {
     setTimeout(() => setLoginPopupVisible(true), 1000)
   }, [])
 
+  // userLogin = () => {
+
+  // }
 
 
   return (
@@ -41,7 +46,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={() => <HomePage data={guestsPosts} />} />
           <Container>
-            <Route path='/login' component={LoginPage} />
+            <Route path='/login' component={() => <LoginPage setToken={setToken} />} />
             <Route path='/signup' component={SignupPage} />
             <Route path='/main' component={MainPage} />
             <Footer />

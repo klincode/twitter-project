@@ -1,14 +1,80 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, FormLabel, Button, Wrapper } from '../Shared'
+import axios from 'axios';
+import { API } from '../../API';
+import { showMessage } from '../../helpers/showMessage';
+const LoginForm = ({ setToken }) => {
+  const [errors, setError] = useState([]);
+  const [messages, setMessage] = useState([]);
+  const [userName, setUserName] = useState('adam');
+  const [userPass, setUserPass] = useState('1234');
 
-const LoginForm = () => {
+
+  const userLogIn = (payload) => {
+    axios.post(
+      API.endPoints.login,
+      payload,
+      API.config.headers
+    )
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) setError([...errors, { "server": "Nie udało się zalogować. Sprawdź login i hasło", "type": "error" }])
+        else if (res.data.password) setError([...errors, { "server": res.data.password[0], "type": "error" }]);
+        else if (!res.data.error) {
+          setMessage([...messages, { "server": "Logowanie zakończone powodzeniem", "type": "info" }])
+          setToken(res.data.jwt_token)
+        }
+
+
+      })
+      .catch((err) => {
+        console.log('ff');
+        console.log(err);
+        setError([...errors, { "server": err.toString(), "type": "error" }])
+      })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      console.log('sle');
+      userLogIn({
+        "username": userName,
+        "password": userPass,
+        "ttl": 3600
+      })
+    }
+  }
+
+  const validateForm = () => {
+    let errorMessages = [];
+    if (userName === '') {
+      errorMessages.push({ 'userName': 'Wprowadź nazwię użytkownika', 'type': 'error' });
+    }
+    if (userPass === '') {
+      errorMessages.push({ 'userPass': 'Wprowadź hasło', 'type': 'error' });
+    }
+
+    if (errorMessages.length > 0) { setError(errorMessages); return false } else { setError([]); return true }
+  }
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "userName") setUserName(value);
+    if (name === "userPass") setUserPass(value);
+  }
   return (
-    <Form>
-      <FormLabel>Nazwa Użytkownika<Input type="text" /></FormLabel>
-      <FormLabel>Hasło<Input type="password" /></FormLabel>
-      <Button full type="submit">Zaloguj się</Button>
-    </Form>
-
+    <>
+      <Form onSubmit={handleSubmit}>
+        <FormLabel>Nazwa Użytkownika<Input type="text" name="userName" onChange={handleInputChange} value={userName} /></FormLabel>
+        {showMessage('userName', errors)}
+        <FormLabel>Hasło<Input type="password" name="userPass" onChange={handleInputChange} value={userPass} /></FormLabel>
+        {showMessage('userPass', errors)}
+        <Button full type="submit">Zaloguj się</Button>
+      </Form>
+      {showMessage('server', errors)}
+      {showMessage('server', messages)}
+    </>
   );
 }
 
