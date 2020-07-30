@@ -9,7 +9,6 @@ const LoginForm = ({ setToken, setLoggedIn }) => {
   const [userName, setUserName] = useState('adam');
   const [userPass, setUserPass] = useState('1234');
 
-
   const userLogIn = (payload) => {
     axios.post(
       API.endPoints.login,
@@ -22,11 +21,8 @@ const LoginForm = ({ setToken, setLoggedIn }) => {
         else if (res.data.password) setError([...errors, { "server": res.data.password[0], "type": "error" }]);
         else if (!res.data.error) {
           setMessage([...messages, { "server": "Logowanie zakończone powodzeniem", "type": "info" }]);
-
           authenticateUser(res.data.jwt_token)
         }
-
-
       })
       .catch((err) => {
         console.log('ff');

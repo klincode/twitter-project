@@ -17,7 +17,6 @@ export const S = {
   flex-basis:30%;
   @media (max-width:768px){
     display:flex;
-    flex-wrap:no-wrap;
     flex-basis:100%;
     /* flex-direction:row; */
 
