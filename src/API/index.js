@@ -1,10 +1,12 @@
 import axios from 'axios';
 
+let token = localStorage.getItem('jwt_token') || "";
 export const API = {
   config: {
     headers: {
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + token
     }
   },
   endPoints: {

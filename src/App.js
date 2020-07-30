@@ -16,7 +16,7 @@ function App() {
   const [guestsPosts, setGuestsPosts] = useState([]);
   const [load, setLoad] = useState(true);
   const [isLoginPopupVisible, setLoginPopupVisible] = useState(false);
-  const [isLoggedIn, setUserLogIn] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [toke, setToken] = useState();
 
   useEffect(() => {
@@ -33,9 +33,6 @@ function App() {
     setTimeout(() => setLoginPopupVisible(true), 1000)
   }, [])
 
-  // userLogin = () => {
-
-  // }
 
 
   return (
@@ -46,7 +43,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={() => <HomePage data={guestsPosts} />} />
           <Container>
-            <Route path='/login'> {isLoggedIn ? <Redirect to='/main' /> : <LoginPage setToken={setToken} />}</Route>
+            <Route path='/login'> {isLoggedIn ? <Redirect to='/main' /> : <LoginPage setToken={setToken} setLoggedIn={setLoggedIn} />}</Route>
             <Route path='/signup' component={SignupPage} />
             <Route path='/main' component={MainPage} />
             <Footer />

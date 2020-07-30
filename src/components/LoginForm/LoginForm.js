@@ -3,7 +3,7 @@ import { Form, Input, FormLabel, Button, Wrapper } from '../Shared'
 import axios from 'axios';
 import { API } from '../../API';
 import { showMessage } from '../../helpers/showMessage';
-const LoginForm = ({ setToken }) => {
+const LoginForm = ({ setToken, setLoggedIn }) => {
   const [errors, setError] = useState([]);
   const [messages, setMessage] = useState([]);
   const [userName, setUserName] = useState('adam');
@@ -36,7 +36,10 @@ const LoginForm = ({ setToken }) => {
   }
 
   const authenticateUser = (token) => {
+    // setToken({ 'Authorization': 'Bearer ' + token });
     setToken(token);
+    localStorage.setItem('jwt_token', token);
+    setLoggedIn(true);
   }
 
   const handleSubmit = (e) => {
