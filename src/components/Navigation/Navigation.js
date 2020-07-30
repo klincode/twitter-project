@@ -3,18 +3,20 @@ import React from 'react';
 import { Home } from '@styled-icons/boxicons-solid/Home'
 import { S } from './styled'
 
-const Navigation = ({ top }) => {
+const Navigation = ({ top, logOut, isLoggedIn }) => {
   return (
     <S.Container >
       <S.Nav top={top}>
         <ul>
-          <S.Link to="/">Home</S.Link>
-          <S.Link to="/login">Login</S.Link>
+          {!isLoggedIn ? <S.Link to="/">Home</S.Link> : <S.Link to="/main">Home</S.Link>}
+          {!isLoggedIn ? <S.Link to="/login">Login</S.Link> : null}
+
           <S.Link to="/signup">Sign Up</S.Link>
-          <S.Link to="/main">Main</S.Link>
+          {isLoggedIn ? <S.Link to="/" onClick={logOut}>Logout</S.Link> : null}
+
         </ul>
       </S.Nav>
-    </S.Container>
+    </S.Container >
   );
 }
 

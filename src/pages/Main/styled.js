@@ -8,10 +8,20 @@ export const S = {
   max-width:1400px;
   width:100%;
   display:flex;
+  @media (max-width:768px){
+    flex-direction:column;
+  }
   `,
 
   Sidebar: styled.aside`
   flex-basis:30%;
+  @media (max-width:768px){
+    display:flex;
+    flex-wrap:no-wrap;
+    flex-basis:100%;
+    /* flex-direction:row; */
+
+  }
   `,
   Posts: styled.div`
   flex-basis:70%;

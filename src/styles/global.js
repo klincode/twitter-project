@@ -11,7 +11,9 @@ body {
   font-family:'Roboto';
   font-size:15px;
   /* background-image: */
- 
+}
+a:link,a:visited,a:active {
+color:#1da1f3;
 }
 
 `

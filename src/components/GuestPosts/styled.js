@@ -24,7 +24,22 @@ export const S = {
   font-weight:600;
   text-transform:capitalize;
   padding-left:15px;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
   `,
+  UserImg: styled.div`
+  padding:10px;
+  flex-basis:45px;
+    img {
+      min-width:40px;
+      width:40px;
+      border-radius:50%;
+      max-width:100%;
+      max-height:100%;
+      object-fit:cover;
+    }
+    `,
   Content: styled.div`
   color:#767676;
   font-weight:300;

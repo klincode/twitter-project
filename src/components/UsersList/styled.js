@@ -10,12 +10,23 @@ export const S = {
   Users: styled.div`
   display:flex;
   flex-direction:column;
+  @media (max-width:768px){
+    flex-direction:row;
+    flex-wrap:wrap;
+    width:100%;
+    justify-content:center;
+  }
   `,
   User: styled.div`
   display:flex;
   width:100%;
   padding:10px 10px 10px 0;
   border-bottom:1px solid #e7ecf0;
+  @media (max-width:768px){
+    flex-direction:row;
+    flex-basis:25%;
+    flex-shrink:1
+  }
   &:last-child {
     border-bottom:0px;
   }

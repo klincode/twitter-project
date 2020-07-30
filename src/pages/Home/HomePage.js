@@ -6,6 +6,7 @@ import { MessageRounded } from '@styled-icons/boxicons-regular/MessageRounded'
 
 import { GuestsPosts } from '../../components/GuestPosts'
 const HomePage = ({ data }) => {
+
   return (
     <S.Container>
 

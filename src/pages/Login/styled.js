@@ -8,5 +8,6 @@ export const S = {
   transform:translate(-50%,-50%);
   margin:0 auto;
   width:40%;
+
 `
 }

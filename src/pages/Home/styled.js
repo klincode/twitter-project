@@ -21,12 +21,18 @@ export const S = {
   background-repeat:no-repeat;
   background-size:1000px;
   background-position:40% 5%;
-  
+  @media (max-width:768px) {
+      display:none;
+    }
   `,
   RightSide: styled.div`
     flex-basis: 50%;
     margin-left:50%;
     background-color:#fff;
+    @media (max-width:768px) {
+      flex-basis: 100%;
+      margin-left:0;
+    }
   `,
   Content: styled.ul`
     list-style:none;
@@ -40,11 +46,14 @@ export const S = {
 
     li {
       color:#fff;
-      padding:20px;
+      padding:20px 10px;
       font-size:1.4rem;
       letter-spacing:1px;
       font-weight:500;
       margin-left:10px;
+      @media (max-width:1024px) {
+      font-size:1.2rem;
+    }
     }
     span {
       margin-left:20px;      

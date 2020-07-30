@@ -108,7 +108,7 @@ const SignupForm = () => {
         <Input onChange={handleChange} type="password" value={userConfirmPass} name="userConfirmPass" />
           {showMessage('userConfirmPass', errors, messages)}
         </FormLabel>
-        <Button type="submit">Zarejestruj się</Button>
+        <Button full type="submit">Zarejestruj się</Button>
       </Form>
       {showMessage('server', errors, messages)}
     </>
