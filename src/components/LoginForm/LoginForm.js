@@ -21,8 +21,9 @@ const LoginForm = ({ setToken }) => {
         if (res.data.error) setError([...errors, { "server": "Nie udało się zalogować. Sprawdź login i hasło", "type": "error" }])
         else if (res.data.password) setError([...errors, { "server": res.data.password[0], "type": "error" }]);
         else if (!res.data.error) {
-          setMessage([...messages, { "server": "Logowanie zakończone powodzeniem", "type": "info" }])
-          setToken(res.data.jwt_token)
+          setMessage([...messages, { "server": "Logowanie zakończone powodzeniem", "type": "info" }]);
+
+          authenticateUser(res.data.jwt_token)
         }
 
 
@@ -34,10 +35,14 @@ const LoginForm = ({ setToken }) => {
       })
   }
 
+  const authenticateUser = (token) => {
+    setToken(token);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log('sle');
+      console.log('wysylam');
       userLogIn({
         "username": userName,
         "password": userPass,
@@ -66,12 +71,21 @@ const LoginForm = ({ setToken }) => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <FormLabel>Nazwa Użytkownika<Input type="text" name="userName" onChange={handleInputChange} value={userName} /></FormLabel>
+        <FormLabel>
+          Nazwa Użytkownika
+          <Input type="text" name="userName" onChange={handleInputChange} value={userName} />
+        </FormLabel>
         {showMessage('userName', errors)}
-        <FormLabel>Hasło<Input type="password" name="userPass" onChange={handleInputChange} value={userPass} /></FormLabel>
+
+        <FormLabel>
+          Hasło
+          <Input type="password" name="userPass" onChange={handleInputChange} value={userPass} />
+        </FormLabel>
         {showMessage('userPass', errors)}
+
         <Button full type="submit">Zaloguj się</Button>
       </Form>
+
       {showMessage('server', errors)}
       {showMessage('server', messages)}
     </>

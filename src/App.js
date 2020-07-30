@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  BrowserRouter as Router, Switch, Route, Link
+  BrowserRouter as Router, Switch, Route, Link, Redirect
 } from "react-router-dom";
 
 import { Navigation } from './components/Navigation'
@@ -16,7 +16,7 @@ function App() {
   const [guestsPosts, setGuestsPosts] = useState([]);
   const [load, setLoad] = useState(true);
   const [isLoginPopupVisible, setLoginPopupVisible] = useState(false);
-  // const [isUserLoggedIn, setUserLogIn] = useState(true);
+  const [isLoggedIn, setUserLogIn] = useState(false);
   const [toke, setToken] = useState();
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={() => <HomePage data={guestsPosts} />} />
           <Container>
-            <Route path='/login' component={() => <LoginPage setToken={setToken} />} />
+            <Route path='/login'> {isLoggedIn ? <Redirect to='/main' /> : <LoginPage setToken={setToken} />}</Route>
             <Route path='/signup' component={SignupPage} />
             <Route path='/main' component={MainPage} />
             <Footer />
