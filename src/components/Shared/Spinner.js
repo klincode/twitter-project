@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Loader from 'react-loader-spinner'
 const SpinnerLoader = styled.div`
 display:flex;
+margin-top:30%;
 justify-content:center;
 align-items:center;
 z-index:20;

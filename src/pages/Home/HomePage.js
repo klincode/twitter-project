@@ -5,7 +5,7 @@ import { People } from '@styled-icons/ionicons-outline/People'
 import { MessageRounded } from '@styled-icons/boxicons-regular/MessageRounded'
 
 import { GuestsPosts } from '../../components/GuestPosts'
-const HomePage = () => {
+const HomePage = ({ data }) => {
   return (
     <S.Container>
 
@@ -18,7 +18,7 @@ const HomePage = () => {
       </S.LeftSide>
 
       <S.RightSide>
-        <GuestsPosts />
+        <GuestsPosts data={data} />
       </S.RightSide>
     </S.Container >
   );

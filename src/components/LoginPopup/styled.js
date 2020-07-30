@@ -13,15 +13,17 @@ export const S = {
   z-index:20;
   border-radius:10px;
   box-shadow:0 0 10px -2px #333;
+  
   `,
   ModalBack: styled.div`
-  position:absolute;
+  position:fixed;
   top:0;
   left:0;
   background-color:rgba(29,161,243,0.88);
   width:100%;
   height:100vh;
   z-index:10;
+
   `,
 
 

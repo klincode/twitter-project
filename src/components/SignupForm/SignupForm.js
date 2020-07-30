@@ -41,7 +41,6 @@ const SignupForm = () => {
   }
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
     if (validateForm()) {
       createUser({
@@ -85,7 +84,7 @@ const SignupForm = () => {
 
   }
 
-  const showMessageAlert = (inputName) => {
+  const showMessageAlert = (inputName, errors = [], messages = []) => {
     let message = {
       text: '',
       type: ''
