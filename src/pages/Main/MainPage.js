@@ -2,16 +2,16 @@ import React from 'react';
 import { S } from './styled'
 import { UsersList } from '../../components/UsersList'
 import { UserPosts } from '../../components/UserPosts'
-const MainPage = (props) => {
-  console.log(props);
+const MainPage = ({ token }) => {
+
   return (
     <S.Container>
       <S.Posts>
-        <UserPosts />
+        <UserPosts token={token} />
       </S.Posts>
 
       <S.Sidebar>
-        <UsersList />
+        <UsersList token={token} />
       </S.Sidebar>
     </S.Container>
 

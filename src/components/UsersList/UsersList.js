@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { API } from '../../API';
 import { H3, Button, Spinner } from '../Shared'
 import { S } from './styled'
 import { showMessage } from '../../helpers/showMessage'
 import axios from 'axios';
+import { API } from '../../API';
+//      'Authorization': 'Bearer ' + token
 const UsersList = () => {
   const [users, setUsersList] = useState([]);
   const [load, setLoad] = useState(true);
   const [errors, setError] = useState([]);
+  const token = localStorage.getItem('jwt_token');
   useEffect(() => {
     axios({
       method: 'post',
       url: API.endPoints.usersList,
-      headers: API.config.headers,
+      headers: { ...API.config.headers, 'Authorization': 'Bearer ' + token },
     })
       .then((res) => {
         setUsersList(res.data);
         setLoad(false)
       })
-      //todo: dodać wyświetlanie błędów
-      .catch((err) => { console.log(err); setError([...errors, { "server": err.toString(), "type": "error" }]) })
+      .catch((err) => {
+        console.log(err); setError([...errors, { "server": err.toString(), "type": "error" }])
+      })
   }, [])
 
 

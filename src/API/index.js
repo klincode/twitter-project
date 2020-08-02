@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 let token = localStorage.getItem('jwt_token') || "";
 export const API = {
   config: {
@@ -18,3 +16,6 @@ export const API = {
   },
 }
 
+console.log('====================================');
+console.log(API.config.headers);
+console.log('====================================');

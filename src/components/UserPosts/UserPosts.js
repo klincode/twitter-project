@@ -25,7 +25,7 @@ const UserPosts = () => {
         setLoad(false)
       })
       //todo: dodać wyświetlanie błędów
-      .then((err) => console.log('blad:' + err))
+      .catch((err) => console.log('blad:' + err))
   }, [])
 
 

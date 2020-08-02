@@ -16,11 +16,13 @@ const LoginForm = ({ setToken, setLoggedIn }) => {
       API.config.headers
     )
       .then((res) => {
-        console.log(res);
-        if (res.data.error) setError([...errors, { "server": "Nie udało się zalogować. Sprawdź login i hasło", "type": "error" }])
-        else if (res.data.password) setError([...errors, { "server": res.data.password[0], "type": "error" }]);
+        if (res.data.error) {
+          setError([...errors, { "server": "Nie udało się zalogować. Sprawdź login i hasło", "type": "error" }])
+        } else if (res.data.password) {
+          setError([...errors, { "server": res.data.password[0], "type": "error" }])
+        }
         else if (!res.data.error) {
-          setMessage([...messages, { "server": "Logowanie zakończone powodzeniem", "type": "info" }]);
+          // setMessage([...messages, { "server": "Logowanie zakończone powodzeniem", "type": "info" }]);
           authenticateUser(res.data.jwt_token)
         }
       })
@@ -32,16 +34,15 @@ const LoginForm = ({ setToken, setLoggedIn }) => {
   }
 
   const authenticateUser = (token) => {
-    // setToken({ 'Authorization': 'Bearer ' + token });
     setToken(token);
     localStorage.setItem('jwt_token', token);
     setLoggedIn(true);
+    // setLoginPopupVisible(false);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log('wysylam');
       userLogIn({
         "username": userName,
         "password": userPass,

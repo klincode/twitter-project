@@ -3,13 +3,12 @@ import { S } from './styled'
 import { Search } from '@styled-icons/evil/Search'
 import { People } from '@styled-icons/ionicons-outline/People'
 import { MessageRounded } from '@styled-icons/boxicons-regular/MessageRounded'
-
 import { GuestsPosts } from '../../components/GuestPosts'
-const HomePage = ({ data }) => {
+import { showMessage } from '../../helpers/showMessage'
+const HomePage = ({ data, errors }) => {
 
   return (
     <S.Container>
-
       <S.LeftSide>
         <S.Content>
           <li><Search size="35" /><span> Obserwuj to, co Cię interesuje.</span></li>
@@ -20,6 +19,7 @@ const HomePage = ({ data }) => {
 
       <S.RightSide>
         <GuestsPosts data={data} />
+        {showMessage('server', errors)}
       </S.RightSide>
     </S.Container >
   );

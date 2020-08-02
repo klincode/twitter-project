@@ -4,7 +4,7 @@ import { H2, H1, ReactLink, Wrapper, Logo } from '../Shared'
 import { LoginForm } from '../LoginForm'
 
 
-const LoginPopup = () => {
+const LoginPopup = ({ setLoggedIn, setToken, setLoginPopupVisible }) => {
   return (
     <>
       <S.ModalBack>
@@ -12,7 +12,7 @@ const LoginPopup = () => {
           <Wrapper>
             <Logo />
             <H1 center>Zaloguj się do Twittera</H1>
-            <LoginForm />
+            <LoginForm setToken={setToken} setLoggedIn={setLoggedIn} setLoginPopupVisible={setLoginPopupVisible} />
             <ReactLink to="/signup" >Zarejestruj się, aby korzystać z Twittera</ReactLink>
           </Wrapper>
         </S.ModalFront>
