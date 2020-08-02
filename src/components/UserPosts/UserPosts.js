@@ -16,10 +16,12 @@ const UserPosts = () => {
   const [errors, setError] = useState([]);
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
     axios({
       method: 'post',
       url: API.endPoints.latest,
       headers: API.config.headers,
+      cancelToken: source.token
     })
       .then((res) => {
         setUsersPosts(res.data);
@@ -28,6 +30,10 @@ const UserPosts = () => {
       .catch((err) => {
         setError([...errors, { "server": err.toString(), "type": "error" }])
       })
+
+    return () => {
+      source.cancel();
+    };
   }, [])
 
   return (

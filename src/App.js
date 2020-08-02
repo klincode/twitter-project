@@ -18,10 +18,12 @@ function App() {
   const [errors, setError] = useState([]);
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
     axios({
       method: 'post',
       url: API.endPoints.latest,
       headers: API.config.headers,
+      cancelToken: source.token
     })
       .then((res) => {
         setGuestsPosts(res.data);
@@ -32,17 +34,30 @@ function App() {
         { "server": `Błąd serwera : ${err.toString()}}`, "type": "error" }]);
       });
 
-    setTimeout(() => setLoginPopupVisible(true), 10000);
+    const handle = setTimeout(() => setLoginPopupVisible(true), 1000);
+
+    return () => {
+      clearTimeout(handle)
+      source.cancel();
+    };
   }, [])
 
   useEffect(() => {
-    if (localStorage.getItem('jwt_token')) {
-      setLoggedIn(true);
-      setToken(localStorage.getItem('jwt_token'));
+    let isCancelled = false;
+    if (!isCancelled) {
+      if (localStorage.getItem('jwt_token')) {
+        setLoggedIn(true);
+        setToken(localStorage.getItem('jwt_token'));
+      }
     }
+    return () => {
+      isCancelled = true;
+    };
+
   }, [])
 
   const logOut = () => {
+    const source = axios.CancelToken.source();
     axios({
       method: 'post',
       url: API.endPoints.logout,
@@ -50,14 +65,19 @@ function App() {
         ...API.config.headers,
         'Authorization': 'Bearer ' + token
       },
+      cancelToken: source.token
     })
       .then(() => {
         setLoggedIn(false);
         localStorage.removeItem('jwt_token');
       })
       .catch((err) => {
-        setError([...errors,
-        { "server": `Błąd serwera : ${err.toString()}}`, "type": "error" }]);
+        setError([...errors, { "server": `Błąd serwera : ${err.toString()}}`, "type": "error" }]);
+      })
+      .finally(() => {
+        return () => {
+          source.cancel();
+        };
       })
   }
 
@@ -74,10 +94,10 @@ function App() {
         <Navigation top logOut={logOut} isLoggedIn={isLoggedIn} />
 
         <Switch>
-          <Route exact path='/' component={() => <HomePage data={guestsPosts} errors={errors} />}>
-            {isLoggedIn ? <Redirect to='/main' /> : null}
-          </Route>
+          {/* <Route exact path='/' component={() => <HomePage data={guestsPosts} errors={errors} isLoggedIn={isLoggedIn} />} /> */}
+          <Route exact path='/'> {isLoggedIn ? <Redirect to='/main' /> : <HomePage data={guestsPosts} errors={errors} isLoggedIn={isLoggedIn} />}</Route>
           <Container>
+
             <Route path='/login'> {isLoggedIn ? <Redirect to='/main' /> : <LoginPage setToken={setToken} setLoggedIn={setLoggedIn} />}</Route>
             <Route path='/signup' component={SignupPage} />
             <Route path='/main'> {isLoggedIn ? <MainPage /> : <LoginPage setToken={setToken} setLoggedIn={setLoggedIn} />}</Route>

@@ -5,9 +5,11 @@ import { People } from '@styled-icons/ionicons-outline/People';
 import { MessageRounded } from '@styled-icons/boxicons-regular/MessageRounded';
 import { GuestsPosts } from '../../components/GuestPosts';
 import { showMessage } from '../../helpers/showMessage';
-
-const HomePage = ({ data, errors }) => {
+import { Redirect } from "react-router-dom";
+import { MainPage } from '../../pages';
+const HomePage = ({ data, errors, isLoggedIn }) => {
   return (
+
     <S.Container>
       <S.LeftSide>
         <S.Content>
@@ -22,6 +24,7 @@ const HomePage = ({ data, errors }) => {
         {showMessage('server', errors)}
       </S.RightSide>
     </S.Container >
+
   );
 }
 

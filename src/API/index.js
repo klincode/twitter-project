@@ -3,6 +3,7 @@ export const API = {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+
     }
   },
   endPoints: {

@@ -12,10 +12,12 @@ const UsersList = () => {
   const token = localStorage.getItem('jwt_token');
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
     axios({
       method: 'post',
       url: API.endPoints.usersList,
       headers: { ...API.config.headers, 'Authorization': 'Bearer ' + token },
+      cancelToken: source.token
     })
       .then((res) => {
         setUsersList(res.data);
@@ -24,6 +26,11 @@ const UsersList = () => {
       .catch((err) => {
         setError([...errors, { "server": err.toString(), "type": "error" }])
       })
+
+    return () => {
+      source.cancel();
+    };
+
   }, [])
 
   return (
