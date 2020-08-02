@@ -11,6 +11,7 @@ export const showMessage = (inputName, errors = [], messages = []) => {
       message.text = item[inputName];
       message.type = item['type'];
     }
+
   })
 
   messages.filter(item => {
@@ -18,6 +19,7 @@ export const showMessage = (inputName, errors = [], messages = []) => {
       message.text = item[inputName];
       message.type = item['type'];
     }
+
   })
   if (message.type === 'error') return <Alert error >{message.text}</Alert>
   if (message.type === 'info') return <Alert info center>{message.text}</Alert>

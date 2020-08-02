@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 import { LoginPopup } from './components/LoginPopup';
-import { HomePage, LoginPage, SignupPage, MainPage, Page404 } from './pages';
+import { HomePage, LoginPage, SignupPage, MainPage } from './pages';
 import { Container } from './components/Shared';
 import GlobalStyle from './styles/global';
 import axios from 'axios';

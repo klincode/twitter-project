@@ -32,7 +32,7 @@ const UsersList = () => {
       {!load ?
         <S.Users>
           {users.map((item, index) => {
-            const { avatar_url, created_at, email, id, updated_at, username } = item;
+            const { avatar_url, email, username } = item;
             return (
               <S.User key={index}>
                 <S.UserInfo>

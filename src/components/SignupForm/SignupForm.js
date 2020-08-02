@@ -54,6 +54,8 @@ const SignupForm = () => {
       case 'userEmail': { setUserEmail(value); break; }
       case 'userPass': { setUserPass(value); break; }
       case 'userConfirmPass': { setUserConfirmPass(value); break; }
+      default: setError([...errors,
+      { "server": `Sth went wrong...`, "type": "error" }])
     }
   }
 
