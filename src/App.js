@@ -56,7 +56,8 @@ function App() {
         localStorage.removeItem('jwt_token');
       })
       .catch((err) => {
-        setError([...errors, { "server": `Błąd serwera : ${err.toString()}}`, "type": "error" }]);
+        setError([...errors,
+        { "server": `Błąd serwera : ${err.toString()}}`, "type": "error" }]);
       })
   }
 

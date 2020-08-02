@@ -15,7 +15,7 @@ const LoginPopup = ({ setLoggedIn, setToken, setLoginPopupVisible }) => {
               setToken={setToken}
               setLoggedIn={setLoggedIn}
               setLoginPopupVisible={setLoginPopupVisible} />
-            <ReactLink to="/signup" >Zarejestruj się, aby korzystać z Twittera</ReactLink>
+            <ReactLink to="/signup" onClick={() => setLoginPopupVisible(false)}>Zarejestruj się, aby korzystać z Twittera</ReactLink>
           </Wrapper>
         </S.ModalFront>
       </S.ModalBack>
