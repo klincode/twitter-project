@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-
+import styled from 'styled-components';
 
 export const S = {
   ModalFront: styled.div`
@@ -19,6 +18,7 @@ export const S = {
     border-radius:0px;
   }
   `,
+
   ModalBack: styled.div`
   position:fixed;
   top:0;
@@ -27,7 +27,6 @@ export const S = {
   width:100%;
   height:100vh;
   z-index:10;
-
   `,
 
 

@@ -7,7 +7,10 @@ const LoginPage = ({ setToken, setLoggedIn, setLoginPopupVisible }) => {
     <Wrapper w50>
       <Logo />
       <H1 center>Zaloguj się do Twittera</H1>
-      <LoginForm setToken={setToken} setLoggedIn={setLoggedIn} setLoginPopupVisible={setLoginPopupVisible} />
+      <LoginForm
+        setToken={setToken}
+        setLoggedIn={setLoggedIn}
+        setLoginPopupVisible={setLoginPopupVisible} />
       <ReactLink to="/signup" >Zarejestruj się, aby korzystać z Twittera</ReactLink>
     </Wrapper>
   );

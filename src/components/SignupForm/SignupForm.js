@@ -1,44 +1,38 @@
 import React, { useState } from 'react';
-import { Form, Input, FormLabel, Button, Alert } from '../Shared';
+import { Form, Input, FormLabel, Button } from '../Shared';
 import { API } from '../../API';
 import { showMessage } from '../../helpers/showMessage';
-import axios from 'axios'
+import axios from 'axios';
 
 const SignupForm = () => {
-  const [userName, setUserName] = useState('homer666');
-  const [userEmail, setUserEmail] = useState('adam@em.pl');
-  const [userPass, setUserPass] = useState('adam!@#1');
-  const [userConfirmPass, setUserConfirmPass] = useState('adam!@#1');
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [userPass, setUserPass] = useState('');
+  const [userConfirmPass, setUserConfirmPass] = useState('');
   const [errors, setError] = useState([]);
   const [messages, setMessage] = useState([]);
 
   const createUser = (payload) => {
-    axios.post(
-      API.endPoints.signup,
-      payload,
-      API.config.headers
-    )
+    axios({
+      method: 'post',
+      url: API.endPoints.signup,
+      headers: API.config.headers,
+      data: payload
+    })
       .then((res) => {
         if (!res.data.signedup) {
-          setError([...errors, { "server": `Błąd serwera : ${res.status} ${res.data.message.username[0]}`, "type": "error" }]);
-
-        } else {
-          setMessage([...messages, { "server": `Użytkownik ${res.data.user.username} : ${res.data.user.email} został zarejestrowany w systemie`, "type": "info" }])
-
+          setError([...errors,
+          { "server": `Błąd serwera : ${res.status} ${res.data.message.username[0]}`, "type": "error" }]);
+        }
+        else {
+          setMessage([...messages,
+          { "server": `Użytkownik ${res.data.user.username} : ${res.data.user.email} został zarejestrowany w systemie`, "type": "info" }])
         }
       })
       .catch((err) => {
-        setError([...errors, { "server": `Błąd serwera : ${err.response.status} ${err.response.statusText}`, "type": "error" }])
+        setError([...errors,
+        { "server": `Błąd serwera : ${err.response.status} ${err.response.statusText}`, "type": "error" }])
       })
-
-  }
-
-  const clearForm = () => {
-    setUserName('');
-    setUserEmail('');
-    setUserPass('');
-    setUserConfirmPass('');
-    setMessage(['']);
   }
 
   const handleSubmit = (e) => {
@@ -80,9 +74,14 @@ const SignupForm = () => {
     if (userConfirmPass !== userPass) {
       errorMessages.push({ 'userConfirmPass': 'Wprowadzone hasła są różne', 'type': 'error' });
     }
-
-    if (errorMessages.length > 0) { setError(errorMessages); return false } else { setError([]); return true }
-
+    if (errorMessages.length > 0) {
+      setError(errorMessages);
+      return false
+    }
+    else {
+      setError([]);
+      return true
+    }
   }
 
   return (
@@ -90,26 +89,47 @@ const SignupForm = () => {
       <Form onSubmit={handleSubmit}>
         <FormLabel>
           Nazwa Użytkownika
-        <Input onChange={handleChange} type="text" value={userName} name="userName" />
+        <Input
+            onChange={handleChange}
+            type="text"
+            value={userName}
+            name="userName" />
           {showMessage('userName', errors, messages)}
         </FormLabel>
+
         <FormLabel>
           Adres e-mail
-        <Input onChange={handleChange} type="text" value={userEmail} name="userEmail" />
+        <Input
+            onChange={handleChange}
+            type="text"
+            value={userEmail}
+            name="userEmail" />
           {showMessage('userEmail', errors, messages)}
         </FormLabel>
+
         <FormLabel>
           Hasło
-        <Input onChange={handleChange} type="password" value={userPass} name="userPass" />
+        <Input
+            onChange={handleChange}
+            type="password"
+            value={userPass}
+            name="userPass" />
           {showMessage('userPass', errors, messages)}
         </FormLabel>
+
         <FormLabel>
           Powtórz hasło
-        <Input onChange={handleChange} type="password" value={userConfirmPass} name="userConfirmPass" />
+        <Input
+            onChange={handleChange}
+            type="password"
+            value={userConfirmPass}
+            name="userConfirmPass" />
           {showMessage('userConfirmPass', errors, messages)}
         </FormLabel>
+
         <Button full type="submit">Zarejestruj się</Button>
       </Form>
+
       {showMessage('server', errors, messages)}
     </>
   );

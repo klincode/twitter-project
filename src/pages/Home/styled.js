@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { tweeterLogo } from "../../img/SVG";
+
 export const S = {
   Container: styled.div`
   margin:0;
@@ -8,6 +9,7 @@ export const S = {
   width:100%;
   flex-grow:1;
   `,
+
   LeftSide: styled.div`
   position:fixed;
   top:0;
@@ -15,7 +17,6 @@ export const S = {
   width: 50%;
   display:flex;
   justify-content:center;
-  /* align-items:flex-start; */
   background-image:url("${tweeterLogo}");
   background-color:#71c9f7;
   background-repeat:no-repeat;
@@ -25,6 +26,7 @@ export const S = {
       display:none;
     }
   `,
+
   RightSide: styled.div`
     flex-basis: 50%;
     margin-left:50%;
@@ -34,6 +36,7 @@ export const S = {
       margin-left:0;
     }
   `,
+
   Content: styled.ul`
     list-style:none;
     position:absolute;
@@ -43,7 +46,6 @@ export const S = {
     min-width:450px;
     width:80%;
     padding:10px;
-
     li {
       color:#fff;
       padding:20px 10px;
@@ -57,9 +59,7 @@ export const S = {
     }
     span {
       margin-left:20px;      
-
     }
-
 .icon {
   color:red
 }

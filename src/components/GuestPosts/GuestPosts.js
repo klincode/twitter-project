@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { API } from '../../API'
-import { H2, H3, Spinner } from '../Shared'
-import { S } from './styled'
-import { LoginPopup } from '../LoginPopup'
+import React from 'react';
+import { H2 } from '../Shared';
+import { S } from './styled';
 
 const GuestsPosts = ({ data }) => {
   return (
@@ -12,17 +9,18 @@ const GuestsPosts = ({ data }) => {
       <S.Posts>
         {
           data.map((item, index) => {
-            const { user, content, created_at, updated_at, avatar_url } = item;
+            const { user, content, created_at, updated_at } = item;
             let created = new Date(created_at).toLocaleString();
             let updated = updated_at ? 'updated: ' + new Date(updated_at).toLocaleString() : '';
-            console.log(avatar_url);
             return (
               <S.Item key={index}>
                 <S.User>
                   <S.UserImg>
-                    <img src={user.avatar_url} alt="" />
+                    <img src={user.avatar_url} alt={user.username} />
                   </S.UserImg>
-                  {user.username}</S.User>
+                  {user.username}
+                </S.User>
+
                 <S.Content>{content}</S.Content>
                 <S.Date>
                   <span>created: {created}</span>
@@ -33,8 +31,6 @@ const GuestsPosts = ({ data }) => {
           })
         }
       </S.Posts>
-
-
     </S.Container >
   );
 }

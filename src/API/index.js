@@ -1,10 +1,8 @@
-let token = localStorage.getItem('jwt_token') || "";
 export const API = {
   config: {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Bearer ' + token
     }
   },
   endPoints: {
@@ -15,7 +13,3 @@ export const API = {
     "usersList": "https://akademia108.pl/api/social-app/follows/recommendations"
   },
 }
-
-console.log('====================================');
-console.log(API.config.headers);
-console.log('====================================');

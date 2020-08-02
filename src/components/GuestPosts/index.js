@@ -1,1 +1,1 @@
-export * from './GuestPosts'
+export * from './GuestPosts';

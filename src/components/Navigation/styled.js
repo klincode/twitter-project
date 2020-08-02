@@ -1,12 +1,13 @@
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 export const S = {
   Container: styled.div`
   max-width:  1400px;
   position:relative;
   margin:0 auto;
-  /* margin-left:auto; */
   `,
+
   Nav: styled.nav`
   position:${props => props.top ? 'absolute' : 'static'};
   top:0;
@@ -18,6 +19,7 @@ export const S = {
   padding:0 10px;
   z-index:20;
 `,
+
   Link: styled(Link)`
   text-decoration:none;
   text-transform:uppercase;

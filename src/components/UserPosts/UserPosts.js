@@ -6,12 +6,14 @@ import { ArrowShuffle } from '@styled-icons/typicons/ArrowShuffle';
 import { Heart } from '@styled-icons/boxicons-regular/Heart';
 import { ShareAlternative } from '@styled-icons/entypo/ShareAlternative';
 import axios from 'axios';
-import { API } from '../../API'
-
+import { API } from '../../API';
+import { showMessage } from '../../helpers/showMessage';
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 const UserPosts = () => {
   const [usersPosts, setUsersPosts] = useState([]);
   const [load, setLoad] = useState(true);
+  const [errors, setError] = useState([]);
 
   useEffect(() => {
     axios({
@@ -20,15 +22,13 @@ const UserPosts = () => {
       headers: API.config.headers,
     })
       .then((res) => {
-        console.log(res.data);
         setUsersPosts(res.data);
         setLoad(false)
       })
-      //todo: dodać wyświetlanie błędów
-      .catch((err) => console.log('blad:' + err))
+      .catch((err) => {
+        setError([...errors, { "server": err.toString(), "type": "error" }])
+      })
   }, [])
-
-
 
   return (
     <S.Container>
@@ -61,7 +61,9 @@ const UserPosts = () => {
             })
           }
         </S.Posts>
-        : <Spinner />}
+        : <Spinner />
+      }
+      {showMessage('server', errors)}
     </S.Container>
   );
 }

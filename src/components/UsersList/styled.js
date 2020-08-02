@@ -1,5 +1,6 @@
-import styled from 'styled-components'
-import { H2 } from '../Shared'
+import styled from 'styled-components';
+import { H2 } from '../Shared';
+
 export const S = {
   Container: styled.div`
   background-color:#f4f8fb;
@@ -7,6 +8,7 @@ export const S = {
   border-top-left-radius:0;
   border-bottom-left-radius:0;
   `,
+
   Users: styled.div`
   display:flex;
   flex-direction:column;
@@ -17,6 +19,7 @@ export const S = {
     justify-content:center;
   }
   `,
+
   User: styled.div`
   display:flex;
   width:100%;
@@ -34,6 +37,7 @@ export const S = {
     border-top:1px solid #e7ecf0;
   }
   `,
+
   UserInfo: styled.div`
   padding: 0 10px;
   flex-basis:100%;
@@ -42,6 +46,7 @@ export const S = {
   justify-content:space-between;
   align-items:center;
   `,
+
   UserImg: styled.div`
   width:50px;
 
@@ -54,12 +59,13 @@ export const S = {
     object-fit:cover;
   }
   `,
+
   UserLogin: styled.div`
   padding:0 10px;
   `,
+
   H2: styled(H2)`
   border-left:0;
   border-right:0;
-  
   `
 }

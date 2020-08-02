@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import { Navigation } from './components/Navigation'
-import { Footer } from './components/Footer'
-import { LoginPopup } from './components/LoginPopup'
-import { HomePage, LoginPage, SignupPage, MainPage, Page404 } from './pages'
-import { Container } from './components/Shared'
-import GlobalStyle from './styles/global'
-import axios from 'axios'
-import { API } from './API'
+import { Navigation } from './components/Navigation';
+import { Footer } from './components/Footer';
+import { LoginPopup } from './components/LoginPopup';
+import { HomePage, LoginPage, SignupPage, MainPage, Page404 } from './pages';
+import { Container } from './components/Shared';
+import GlobalStyle from './styles/global';
+import axios from 'axios';
+import { API } from './API';
 
 function App() {
   const [guestsPosts, setGuestsPosts] = useState([]);
@@ -28,10 +28,11 @@ function App() {
         setLoad(false)
       })
       .catch((err) => {
-        setError([...errors, { "server": `Błąd serwera : ${err.toString()}}`, "type": "error" }]);
+        setError([...errors,
+        { "server": `Błąd serwera : ${err.toString()}}`, "type": "error" }]);
       });
 
-    setTimeout(() => setLoginPopupVisible(true), 1000);
+    setTimeout(() => setLoginPopupVisible(true), 10000);
   }, [])
 
   useEffect(() => {
@@ -45,9 +46,12 @@ function App() {
     axios({
       method: 'post',
       url: API.endPoints.logout,
-      headers: { ...API.config.headers, 'Authorization': 'Bearer ' + token },
+      headers: {
+        ...API.config.headers,
+        'Authorization': 'Bearer ' + token
+      },
     })
-      .then((res) => {
+      .then(() => {
         setLoggedIn(false);
         localStorage.removeItem('jwt_token');
       })
@@ -59,10 +63,19 @@ function App() {
   return (
     <div className="App">
       <Router>
-        {isLoginPopupVisible && !isLoggedIn ? <LoginPopup setToken={setToken} setLoggedIn={setLoggedIn} setLoginPopupVisible={setLoginPopupVisible} token={token} /> : null}
+        {isLoginPopupVisible && !isLoggedIn ?
+          <LoginPopup
+            setToken={setToken}
+            setLoggedIn={setLoggedIn}
+            setLoginPopupVisible={setLoginPopupVisible}
+            token={token} /> : null}
+
         <Navigation top logOut={logOut} isLoggedIn={isLoggedIn} />
+
         <Switch>
-          <Route exact path='/' component={() => <HomePage data={guestsPosts} errors={errors} />} />
+          <Route exact path='/' component={() => <HomePage data={guestsPosts} errors={errors} />}>
+            {isLoggedIn ? <Redirect to='/main' /> : null}
+          </Route>
           <Container>
             <Route path='/login'> {isLoggedIn ? <Redirect to='/main' /> : <LoginPage setToken={setToken} setLoggedIn={setLoggedIn} />}</Route>
             <Route path='/signup' component={SignupPage} />

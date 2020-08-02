@@ -1,14 +1,16 @@
 import styled from 'styled-components'
 import { H2 } from '../Shared'
+
 export const S = {
   Container: styled.div`
   background-color:#f4f8fb;
   `,
+
   Posts: styled.div`
   display:flex;
   flex-direction:column;
-
   `,
+
   Post: styled.section`
   padding:10px;
   border:1px solid #e7ecf0;
@@ -19,6 +21,7 @@ export const S = {
     border-bottom:1px solid #e7ecf0;
   }
   `,
+
   UserImg: styled.div`
   padding:10px;
   flex-basis:75px;
@@ -31,6 +34,7 @@ export const S = {
       object-fit:cover;
     }
     `,
+
   Content: styled.div`
   flex-basis:calc(100% - 75px);
   color:#767676;
@@ -44,8 +48,10 @@ export const S = {
     margin-left:10px;
   }
   `,
+
   Text: styled.p`
   `,
+
   Icons: styled.div`
   display:flex;
   width:80%;
@@ -54,17 +60,18 @@ export const S = {
   color:#6d747c;
   padding:0;
   margin:40px 0 10px 0;
+  @media (max-width:768px) {
+    width:100%;
+  }
   span {
     padding:5px;
   }
   `,
-  H2: styled(H2)`
 
+  H2: styled(H2)`
   background-color:#fff;
   position:sticky;
   top: 0;
-  /* padding:0; */
-  /* margin:18px 0 0; */
   margin-bottom:0;
   `
 }

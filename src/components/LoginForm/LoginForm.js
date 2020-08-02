@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Form, Input, FormLabel, Button, Wrapper } from '../Shared'
+import { Form, Input, FormLabel, Button, Wrapper } from '../Shared';
 import axios from 'axios';
 import { API } from '../../API';
 import { showMessage } from '../../helpers/showMessage';
+
 const LoginForm = ({ setToken, setLoggedIn }) => {
   const [errors, setError] = useState([]);
   const [messages, setMessage] = useState([]);
@@ -10,11 +11,12 @@ const LoginForm = ({ setToken, setLoggedIn }) => {
   const [userPass, setUserPass] = useState('1234');
 
   const userLogIn = (payload) => {
-    axios.post(
-      API.endPoints.login,
-      payload,
-      API.config.headers
-    )
+    axios({
+      method: 'post',
+      url: API.endPoints.login,
+      headers: API.config.headers,
+      data: payload
+    })
       .then((res) => {
         if (res.data.error) {
           setError([...errors, { "server": "Nie udało się zalogować. Sprawdź login i hasło", "type": "error" }])
@@ -22,13 +24,11 @@ const LoginForm = ({ setToken, setLoggedIn }) => {
           setError([...errors, { "server": res.data.password[0], "type": "error" }])
         }
         else if (!res.data.error) {
-          // setMessage([...messages, { "server": "Logowanie zakończone powodzeniem", "type": "info" }]);
+          setMessage([...messages, { "server": "Logowanie zakończone powodzeniem", "type": "info" }]);
           authenticateUser(res.data.jwt_token)
         }
       })
       .catch((err) => {
-        console.log('ff');
-        console.log(err);
         setError([...errors, { "server": err.toString(), "type": "error" }])
       })
   }
@@ -37,7 +37,6 @@ const LoginForm = ({ setToken, setLoggedIn }) => {
     setToken(token);
     localStorage.setItem('jwt_token', token);
     setLoggedIn(true);
-    // setLoginPopupVisible(false);
   }
 
   const handleSubmit = (e) => {
@@ -59,14 +58,23 @@ const LoginForm = ({ setToken, setLoggedIn }) => {
     if (userPass === '') {
       errorMessages.push({ 'userPass': 'Wprowadź hasło', 'type': 'error' });
     }
-
-    if (errorMessages.length > 0) { setError(errorMessages); return false } else { setError([]); return true }
+    if (errorMessages.length > 0) {
+      setError(errorMessages); return false
+    }
+    else {
+      setError([]); return true
+    }
   }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "userName") setUserName(value);
-    if (name === "userPass") setUserPass(value);
+    if (name === "userName") {
+      setUserName(value)
+    };
+
+    if (name === "userPass") {
+      setUserPass(value)
+    };
   }
   return (
     <>

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Alert } from '../components/Shared'
+import { Alert } from '../components/Shared';
+
 export const showMessage = (inputName, errors = [], messages = []) => {
   let message = {
     text: '',

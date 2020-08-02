@@ -1,6 +1,7 @@
 import React from 'react';
-import { SignupForm } from '../../components/SignupForm'
-import { Wrapper, Logo, H1 } from '../../components/Shared'
+import { SignupForm } from '../../components/SignupForm';
+import { Wrapper, Logo, H1 } from '../../components/Shared';
+
 const SignupPage = () => {
   return (
     <Wrapper w50>

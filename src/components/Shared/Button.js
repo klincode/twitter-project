@@ -1,7 +1,6 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 export const Button = styled.button`
-/* min-width:250px; */
 width:${props => props.full ? '100%' : '250px'};
 margin: 15px auto;
 background-color:#1da1f3;

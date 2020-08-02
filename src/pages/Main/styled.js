@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-
+import styled from 'styled-components';
 
 export const S = {
   Container: styled.main`
@@ -22,6 +21,7 @@ export const S = {
 
   }
   `,
+
   Posts: styled.div`
   flex-basis:70%;
   `,

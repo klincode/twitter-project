@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const S = {
   Container: styled.div`
@@ -6,10 +6,12 @@ export const S = {
   border-radius:10px;
   margin:50px 20px;
   `,
+
   Posts: styled.div`
   display:flex;
   flex-direction:column;
   `,
+
   Item: styled.div`
   padding:10px 10px 10px 0;
   border-bottom:1px solid #e7ecf0;
@@ -20,6 +22,7 @@ export const S = {
     border-top:1px solid #e7ecf0;
   }
   `,
+
   User: styled.div`
   font-weight:600;
   text-transform:capitalize;
@@ -28,6 +31,7 @@ export const S = {
   flex-direction:row;
   align-items:center;
   `,
+
   UserImg: styled.div`
   padding:10px;
   flex-basis:45px;
@@ -40,21 +44,22 @@ export const S = {
       object-fit:cover;
     }
     `,
+
   Content: styled.div`
   color:#767676;
   font-weight:300;
   padding-top:10px;
   padding-left:15px;
   `,
+
   Date: styled.div`
   padding-top:10px;
-    font-size:0.7rem;
-    color:#767676;
-      padding-left:15px;
+  font-size:0.7rem;
+  color:#767676;
+  padding-left:15px;
     span {
       font-weight:500;
       margin-right:10px;
     }
     `
-
 }
