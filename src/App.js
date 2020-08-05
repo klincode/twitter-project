@@ -57,6 +57,9 @@ function App() {
   }, [])
 
   const logOut = () => {
+    setLoggedIn(false);
+    localStorage.removeItem('jwt_token');
+
     const source = axios.CancelToken.source();
     axios({
       method: 'post',
