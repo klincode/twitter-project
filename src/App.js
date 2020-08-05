@@ -34,7 +34,7 @@ function App() {
         { "server": `Błąd serwera : ${err.toString()}}`, "type": "error" }]);
       });
 
-    const handle = setTimeout(() => setLoginPopupVisible(true), 1000);
+    const handle = setTimeout(() => setLoginPopupVisible(true), 10000);
 
     return () => {
       clearTimeout(handle)
@@ -105,7 +105,7 @@ function App() {
             <Route path='/signup' component={SignupPage} />
             <Route path='/main'> {isLoggedIn ? <MainPage /> : <LoginPage setToken={setToken} setLoggedIn={setLoggedIn} />}</Route>
             <Route path='/logout' component={() => <HomePage data={guestsPosts} />} />
-            <Footer />
+            <Footer logOut={logOut} isLoggedIn={isLoggedIn} />
           </Container>
         </Switch>
       </Router>

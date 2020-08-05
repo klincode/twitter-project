@@ -2,11 +2,11 @@ import React from 'react';
 import { Navigation } from '../Navigation';
 import { S } from './styled';
 
-const Footer = () => {
+const Footer = ({ logOut, isLoggedIn }) => {
   return (
     <>
       <S.Footer>
-        <Navigation />
+        <Navigation logOut={logOut} isLoggedIn={isLoggedIn} />
       </S.Footer>
     </>
   );

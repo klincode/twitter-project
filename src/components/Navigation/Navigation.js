@@ -8,7 +8,7 @@ const Navigation = ({ top, logOut, isLoggedIn }) => {
         <ul>
           {!isLoggedIn ? <S.Link to="/">Home</S.Link> : <S.Link to="/main">Home</S.Link>}
           {!isLoggedIn ? <S.Link to="/login">Login</S.Link> : null}
-          <S.Link to="/signup">Sign Up</S.Link>
+          {!isLoggedIn ? <S.Link to="/signup">Sign Up</S.Link> : null}
           {isLoggedIn ? <S.Link to="/" onClick={logOut}>Logout</S.Link> : null}
         </ul>
       </S.Nav>

@@ -6,7 +6,7 @@ export const S = {
   top:50%;
   left:50%;
   width:50%;
-  height:60%;
+  min-height:60%;
   transform:translate(-50%,-50%);
   background-color:#f4f8fb;
   z-index:20;
